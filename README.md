@@ -8,11 +8,12 @@
 * Node and NPM
 * IDE of your choice such as one of the ones listed in Tools below
 * React CLI
+* Google Chrome browser
 
 <br>*System requirements: PC with Windows 10, Mac with latest MacOS
 
 # What we will be doing
-• Create a new React app using the
+• Create a new React app using the React CLI
 
 # Steps to install
 1. Open terminal
@@ -37,10 +38,15 @@ https://www.jetbrains.com/webstorm/download/#section=mac<br>
 https://atom.io/<br>
 https://www.sublimetext.com/<br>
 
+Google Chrome
+
 Windows<br>
 https://www.jetbrains.com/webstorm/download/#section=windows<br>
 https://atom.io/<br>
 https://www.sublimetext.com/<br>
+
+Google Chrome
+
 
 
 

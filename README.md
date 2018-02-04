@@ -23,9 +23,8 @@
 # What we will be doing:
 * Creating a new React app using the React CLI
 * Learning what JSX is and how it relates to HTML which is displayed in the browser
-* Learning how to make reusable components
+* Learning how to make reusable components and how props provide content
 * Learning what state is in React
-* Learning what props are in React
 * Learning how to share state through props and how that affects rendering of JSX
 * Learning how to update state from a nested component
 * Learn how to tie into an API and display data from that API

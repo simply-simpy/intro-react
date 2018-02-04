@@ -7,6 +7,7 @@ class App extends Component {
     return (
       <div className="App">
        <DropDown />
+        <div style={{marginTop: 100 + "px", marginBottom: 100 + "px"}} className="border-top"/>
       </div>
     );
   }

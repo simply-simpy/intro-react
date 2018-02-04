@@ -20,8 +20,8 @@ export default class DropDown extends React.Component {
 
   render() {
     return (
-        <div className="wrap-dropdown" style={{display:"flex", justifyContent:"center"}}>
-          <div className="dropdown">
+        <div className="wrap-dropdown" style={{display:"flex", justifyContent:"center", flexDirection:"column"}}>
+          <div className="dropdown" style={{margin:"auto"}}>
             <button style={{display:"block"}} className="btn btn-secondary dropdown-toggle" onClick={this.toggleButton}>
               Dropdown button
             </button>
@@ -32,7 +32,7 @@ export default class DropDown extends React.Component {
               <a className="dropdown-item" href="#">Something else here</a>
             </div>
           </div>
-          <p style={{marginTop: 200 + "px", position: "absolute", fontWeight: "bold", width: 100 + "%"}}>The state of
+          <p style={{marginTop: 150 + "px", fontWeight: "bold", width: 100 + "%"}}>The state of
             isToggleOpen is: {this.state.isToggleOpen === true ? " true " : " false"}</p>
         </div>
     );

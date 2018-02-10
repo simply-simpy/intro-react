@@ -23,21 +23,21 @@ class App extends Component {
         {
           name: "Fred Jones",
           avatar: "http://i.pravatar.cc/150?img=51",
-          profession: "computer programmer",
+          profession: "programmer",
           city: "Portland",
           email: "fres@gmail.com"
         },
         {
           name: "Linda Williams",
           avatar: "http://i.pravatar.cc/150?img=44",
-          profession: "Doctor",
+          profession: "doctor",
           city: "Atlanta",
           email: "linda@gmail.com"
         },
         {
           name: "Piff Jenkins",
           avatar: "http://i.pravatar.cc/150?img=57",
-          profession: "Doctor",
+          profession: "doctor",
           city: "LA",
           email: "piff@gmail.com"
         },
@@ -51,14 +51,14 @@ class App extends Component {
         {
           name: "Hanson Deck",
           avatar: "http://i.pravatar.cc/150?img=13",
-          profession: "Doctor",
+          profession: "doctor",
           city: "Portland",
           email: "hanson@gmail.com"
         },
         {
           name: "Hilary Ouse",
           avatar: "http://i.pravatar.cc/150?img=9",
-          profession: "Doctor",
+          profession: "doctor",
           city: "Atlanta",
           email: "hilary@gmail.com"
         }
@@ -75,7 +75,25 @@ class App extends Component {
     )
   }
 
+   selectProfession = (value) => {
+     let selectedCandidates=[];
+      this.state.selectedCandidates.forEach(function(candidate){
+       for (let key in candidate){
+         if (candidate.hasOwnProperty(key)) {
+           if (candidate[key].indexOf(value) !== -1) {
+
+             selectedCandidates.push(candidate)
+             console.log("the candidate: ", selectedCandidates)
+           }
+         }
+       }
+     })
+
+  };
+
   render() {
+    console.log(this.selectProfession())
+
     const professionStyle = {display: 'block'};
     const itemStyle = {display: 'block'};
     const peopleProfessionStyle = {display: 'block'};
@@ -97,8 +115,19 @@ class App extends Component {
       lineHeight: '1.3'
     };
     const labelStyle = {
-      display: 'block'
+      display: 'block',
+      padding: '10px',
+      marginRight: '4px'
     };
+    const filterByProfessionStyle = {
+        width: '145px',
+        margin: '30px auto',
+        textAlign: 'left',
+        border: '1px solid'
+    };
+    // let selectProfession = () => {
+    //   console.log('profession selected: ', this.value)
+    // };
 
     let avatarProfession = this.state.selectedCandidates.map((candidate, index) =>
         <div className="avatar-profession" key={index}>
@@ -122,22 +151,23 @@ class App extends Component {
     );
     filteredProfessions = [...new Set(filteredProfessions)]; // removes duplicates
     let professions = filteredProfessions.map((profession, index) =>
-            <label key={index}>
-              <input type="radio" id={index} name="candidate.profession" value="candidate.profession"/>
-              <span className="label">{profession.profession}</span>
+            <label style={labelStyle} key={index}>
+              <input type="radio" id={index} name="professions" value={profession} onChange={()=>{this.selectProfession(profession)}}/>
+              <span style={{marginLeft: 4+'px'}} className="label">{profession}</span>
             </label>
         );
     console.log("filtered 2: ", filteredProfessions)
-    // filteredLocations.push(location);
-    // filteredLocations = [...new Set(filteredLocations)]; // removes duplicates
+
     return (
         <div className="App">
           <h1>Job Candidate Search</h1>
           <div style={avatarProfessionStyle} className="avatar-profession">
             {avatarProfession}
           </div>
-          <div className="filter-by-profession">
-            {professions}
+          <div style={filterByProfessionStyle} className="filter-by-profession">
+            <form>
+              {professions}
+            </form>
           </div>
           <div className="full-info-wrap">
             {fullInfo}

@@ -16,6 +16,7 @@
 1. Open terminal
 2. git clone into where you want site: git@github.com:simply-simpy/intro-react.git
 3. Open site in IDE of Choice
+4. Browse to one of the folders in `finished` and run `npm install` in your terminal
 
 # What we will be doing via hands-on examples (best if you have a laptop with latest MacOS or Windows 10):
 * Creating a new React app using the React CLI

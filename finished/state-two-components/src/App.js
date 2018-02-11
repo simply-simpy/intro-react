@@ -63,11 +63,13 @@ class App extends Component {
           email: "hilary@gmail.com"
         }
       ],
-      selectedCandidates: []
+      selectedCandidates: [],
+      value: ""
     };
   }
 
   componentDidMount() {
+    console.log('cdm: ', this)
     this.setState(
         {
           selectedCandidates: this.state.candidates
@@ -75,24 +77,33 @@ class App extends Component {
     )
   }
 
-   selectProfession = (value) => {
-     let selectedCandidates=[];
-      this.state.selectedCandidates.forEach(function(candidate){
-       for (let key in candidate){
-         if (candidate.hasOwnProperty(key)) {
-           if (candidate[key].indexOf(value) !== -1) {
 
-             selectedCandidates.push(candidate)
-             console.log("the candidate: ", selectedCandidates)
-           }
-         }
-       }
-     })
 
-  };
+
+
 
   render() {
-    console.log(this.selectProfession())
+    // let checkedFilters = this.checkedFilters.map(Number); // turning filter values back to integer
+    // let filteredLocations = [];
+    // filteredLocations.length = 0;
+    // this.state.masterLocations.map(function (location) {
+    //   checkedFilters.map(function (cuisineId) {
+    //     if (location.amenities) {
+    //       if (location.amenities.privateDining && cuisineId === -1) {
+    //         filteredLocations.push(location);
+    //         filteredLocations = [...new Set(filteredLocations)]; // removes duplicates
+    //       }
+    //       if (location.amenities.catering && cuisineId === -2) {
+    //         filteredLocations.push(location);
+    //         filteredLocations = [...new Set(filteredLocations)]; // removes duplicates
+    //       }
+    //     }
+    //     if (location.cuisine.id === cuisineId) {
+    //       filteredLocations.push(location);
+    //       filteredLocations = [...new Set(filteredLocations)]; // removes duplicates
+    //     }
+    //   });
+    // });
 
     const professionStyle = {display: 'block'};
     const itemStyle = {display: 'block'};
@@ -120,10 +131,10 @@ class App extends Component {
       marginRight: '4px'
     };
     const filterByProfessionStyle = {
-        width: '145px',
-        margin: '30px auto',
-        textAlign: 'left',
-        border: '1px solid'
+      width: '145px',
+      margin: '30px auto',
+      textAlign: 'left',
+      border: '1px solid'
     };
     // let selectProfession = () => {
     //   console.log('profession selected: ', this.value)
@@ -150,13 +161,34 @@ class App extends Component {
         filteredProfessions.push(candidate.profession)
     );
     filteredProfessions = [...new Set(filteredProfessions)]; // removes duplicates
-    let professions = filteredProfessions.map((profession, index) =>
-            <label style={labelStyle} key={index}>
-              <input type="radio" id={index} name="professions" value={profession} onChange={()=>{this.selectProfession(profession)}}/>
-              <span style={{marginLeft: 4+'px'}} className="label">{profession}</span>
-            </label>
-        );
     console.log("filtered 2: ", filteredProfessions)
+    console.log("this: ", this)
+    let updatedCandidates = [];
+
+    let handleRadio=(event)=>{
+      console.log('handle radio')
+      while (updatedCandidates.length) updatedCandidates.pop();
+      let profession = event.target.value;
+      console.log('profession: ', profession)
+      this.state.candidates.map(function(candidate){
+        console.log('candidates: ', candidate);
+        if(candidate.profession === profession) {
+          updatedCandidates.push(candidate);
+        }
+      });
+      console.log(updatedCandidates)
+      this.setState({
+        selectedCandidates: updatedCandidates
+      })
+    };
+    let professions = filteredProfessions.map((profession, index) =>
+        <label style={labelStyle} key={index}>
+          {/*<input type="radio" id={index} name="professions" value={profession} onChange={()=>{this.selectProfession(profession)}}/>*/}
+          <input type="radio" id={index} name="professions" value={profession} onChange={handleRadio}/>
+          <span style={{marginLeft: 4 + 'px'}} className="label">{profession}</span>
+        </label>
+    );
+
 
     return (
         <div className="App">
@@ -175,7 +207,7 @@ class App extends Component {
 
           {/*shows the updating of selected candidates*/}
           <div style={{marginTop: 30 + "px"}} className="state">
-            Selected Candidates:<br/>
+            Selected Candidates State Updating:<br/>
             <code style={{fontWeight: 'bold'}}>
               {this.state.selectedCandidates.map((selectedCandidates) =>
                   JSON.stringify(selectedCandidates)

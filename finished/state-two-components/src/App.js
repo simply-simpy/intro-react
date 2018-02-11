@@ -186,7 +186,8 @@ class App extends Component {
             </form>
           </div>
 
-         <FullInfo data={fullInfo} /> // This is an example of passing data from a parent component to a child component through props.
+         <FullInfo data={fullInfo} />
+          {/*This is an example of passing data from a parent component to a child component through props.*/}
 
           <div style={{marginTop: 30 + "px"}} className="state">
             Selected Candidates State Updating:<br/>

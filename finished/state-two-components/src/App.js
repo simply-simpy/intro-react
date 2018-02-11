@@ -69,6 +69,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+    // setting the state one time of selectedCandidates to the master list of candidates
     this.setState(
         {
           selectedCandidates: this.state.candidates
@@ -76,8 +77,8 @@ class App extends Component {
     )
   }
 
-
   render() {
+    // the CSS for various page elements
     const professionStyle = {display: 'block'};
     const itemStyle = {display: 'block'};
     const peopleProfessionStyle = {display: 'block'};
@@ -110,6 +111,7 @@ class App extends Component {
       border: '1px solid'
     };
 
+    // Generating the HTML for the avatar and profession.
     let avatarProfession = this.state.selectedCandidates.map((candidate, index) =>
         <div className="avatar-profession" key={index}>
           <span style={peopleProfessionStyle} className="avatar"><img src={candidate.avatar} alt=""/></span>
@@ -117,6 +119,7 @@ class App extends Component {
         </div>
     );
 
+    // Generating the HTML for the name, profession, email, and city.
     let fullInfo = this.state.selectedCandidates.map((candidate, index) =>
         <div style={fullInfoStyle} key={index}>
           <span style={itemStyle} className="profession">{candidate.name}</span>
@@ -126,7 +129,7 @@ class App extends Component {
         </div>
     );
 
-    // Loops through state and creates an array of all position title, then removes duplicates
+    // Loops through state and creates an array of all position title, then removes duplicates.
     let filteredProfessions = [];
     this.state.candidates.map((candidate) =>
         filteredProfessions.push(candidate.profession)
@@ -138,15 +141,23 @@ class App extends Component {
     let updatedCandidates = [];
     let handleRadio = (event) => {
       while (updatedCandidates.length) updatedCandidates.pop(); // empties this array each time the handleRadio function is called
-      let profession = event.target.value;
+      let profession = event.target.value; // the value of the radio button
       this.state.candidates.map(function (candidate) {
         if (candidate.profession === profession) {
           updatedCandidates.push(candidate);
         }
       });
-      // sets the state of selected candidates to the newly created array of filtered candidates
+      // Sets the state of selected candidates to the newly created array of filtered candidates.
       this.setState({
         selectedCandidates: updatedCandidates
+      })
+    };
+
+    // Resets list to default state.
+    let showAll = (event) => {
+      event.preventDefault();
+      this.setState({
+        selectedCandidates: this.state.candidates
       })
     };
 
@@ -170,6 +181,7 @@ class App extends Component {
           <div style={filterByProfessionStyle} className="filter-by-profession">
             <form>
               {professions}
+              <button style={{textAlign:"center", margin:  'auto', display: 'block'}} type="radio" id="all" name="professions" value="all" onClick={showAll}>Reset</button>
             </form>
           </div>
 

@@ -26,8 +26,8 @@
 * Learning how to make reusable components and how props provide content
 * Learning what state is in React
 * Learning how to share state through props and how that affects rendering of JSX
-* Learning how to update state from a nested component
-* Learn how to tie into an API and display data from that API
+* Learning how to update state from a nested component — Future Date
+* Learn how to tie into an API and display data from that API — Future Date
 
 
 # Tools

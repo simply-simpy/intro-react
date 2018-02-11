@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import './App.css';
+import FullInfo from './components/FullInfo';
 
 class App extends Component {
   constructor(props) {
@@ -185,9 +186,7 @@ class App extends Component {
             </form>
           </div>
 
-          <div className="full-info-wrap">
-            {fullInfo}
-          </div>
+         <FullInfo data={fullInfo} /> // This is an example of passing data from a parent component to a child component through props.
 
           <div style={{marginTop: 30 + "px"}} className="state">
             Selected Candidates State Updating:<br/>

@@ -12,18 +12,16 @@
 
 <br>*System requirements: PC with Windows 10, Mac with latest MacOS
 
-# What we will be doing
-• Create a new React app using the React CLI
-
 # Steps to install
 1. Open terminal
 2. git clone into where you want site: git@github.com:simply-simpy/intro-react.git
 3. Open site in IDE of Choice
 
-# What we will be doing:
+# What we will be doing via hands-on examples (best if you have a laptop with latest MacOS or Windows 10):
 * Creating a new React app using the React CLI
 * Learning what JSX is and how it relates to HTML which is displayed in the browser
 * Learning how to make reusable components and how props provide content
+* Learning one of many ways to create CSS for React
 * Learning what state is in React
 * Learning how to share state through props and how that affects rendering of JSX
 * Learning how to update state from a nested component — Future Date

@@ -69,7 +69,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log('cdm: ', this)
     this.setState(
         {
           selectedCandidates: this.state.candidates
@@ -78,33 +77,7 @@ class App extends Component {
   }
 
 
-
-
-
-
   render() {
-    // let checkedFilters = this.checkedFilters.map(Number); // turning filter values back to integer
-    // let filteredLocations = [];
-    // filteredLocations.length = 0;
-    // this.state.masterLocations.map(function (location) {
-    //   checkedFilters.map(function (cuisineId) {
-    //     if (location.amenities) {
-    //       if (location.amenities.privateDining && cuisineId === -1) {
-    //         filteredLocations.push(location);
-    //         filteredLocations = [...new Set(filteredLocations)]; // removes duplicates
-    //       }
-    //       if (location.amenities.catering && cuisineId === -2) {
-    //         filteredLocations.push(location);
-    //         filteredLocations = [...new Set(filteredLocations)]; // removes duplicates
-    //       }
-    //     }
-    //     if (location.cuisine.id === cuisineId) {
-    //       filteredLocations.push(location);
-    //       filteredLocations = [...new Set(filteredLocations)]; // removes duplicates
-    //     }
-    //   });
-    // });
-
     const professionStyle = {display: 'block'};
     const itemStyle = {display: 'block'};
     const peopleProfessionStyle = {display: 'block'};
@@ -136,9 +109,6 @@ class App extends Component {
       textAlign: 'left',
       border: '1px solid'
     };
-    // let selectProfession = () => {
-    //   console.log('profession selected: ', this.value)
-    // };
 
     let avatarProfession = this.state.selectedCandidates.map((candidate, index) =>
         <div className="avatar-profession" key={index}>
@@ -156,56 +126,57 @@ class App extends Component {
         </div>
     );
 
+    // Loops through state and creates an array of all position title, then removes duplicates
     let filteredProfessions = [];
     this.state.candidates.map((candidate) =>
         filteredProfessions.push(candidate.profession)
     );
     filteredProfessions = [...new Set(filteredProfessions)]; // removes duplicates
-    console.log("filtered 2: ", filteredProfessions)
-    console.log("this: ", this)
-    let updatedCandidates = [];
 
-    let handleRadio=(event)=>{
-      console.log('handle radio')
-      while (updatedCandidates.length) updatedCandidates.pop();
+    // When a radio button is selected from the list of positions, all candidates are checked to see if they can fill that position.
+    // If so, they are added to the updated candidates array.
+    let updatedCandidates = [];
+    let handleRadio = (event) => {
+      while (updatedCandidates.length) updatedCandidates.pop(); // empties this array each time the handleRadio function is called
       let profession = event.target.value;
-      console.log('profession: ', profession)
-      this.state.candidates.map(function(candidate){
-        console.log('candidates: ', candidate);
-        if(candidate.profession === profession) {
+      this.state.candidates.map(function (candidate) {
+        if (candidate.profession === profession) {
           updatedCandidates.push(candidate);
         }
       });
-      console.log(updatedCandidates)
+      // sets the state of selected candidates to the newly created array of filtered candidates
       this.setState({
         selectedCandidates: updatedCandidates
       })
     };
+
+    // Loops through the filtered professions array, setting the HTML for the radio buttons
     let professions = filteredProfessions.map((profession, index) =>
         <label style={labelStyle} key={index}>
-          {/*<input type="radio" id={index} name="professions" value={profession} onChange={()=>{this.selectProfession(profession)}}/>*/}
           <input type="radio" id={index} name="professions" value={profession} onChange={handleRadio}/>
           <span style={{marginLeft: 4 + 'px'}} className="label">{profession}</span>
         </label>
     );
 
-
     return (
         <div className="App">
+
           <h1>Job Candidate Search</h1>
+
           <div style={avatarProfessionStyle} className="avatar-profession">
             {avatarProfession}
           </div>
+
           <div style={filterByProfessionStyle} className="filter-by-profession">
             <form>
               {professions}
             </form>
           </div>
+
           <div className="full-info-wrap">
             {fullInfo}
           </div>
 
-          {/*shows the updating of selected candidates*/}
           <div style={{marginTop: 30 + "px"}} className="state">
             Selected Candidates State Updating:<br/>
             <code style={{fontWeight: 'bold'}}>
@@ -213,7 +184,9 @@ class App extends Component {
                   JSON.stringify(selectedCandidates)
               )}
             </code>
+
           </div>
+
         </div>
     );
   }
